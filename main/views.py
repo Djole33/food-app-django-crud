@@ -6,11 +6,11 @@ from .models import Item
 
 def index(request):
     item_objects = Item.objects.all()
-    return render(request, template_name='food/index.html', context={'item_objects': item_objects})
+    return render(request, template_name='main/index.html', context={'item_objects': item_objects})
 
 def item(request):
     return HttpResponse("<h1>Hello Items!</h1>")
 
 def detail(request, pk):
     item = Item.objects.get(id=pk)
-    return render(request, 'food/detail.html', context={'item': item})
+    return render(request, 'main/detail.html', context={'item': item})
