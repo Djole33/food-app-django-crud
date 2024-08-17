@@ -10,7 +10,9 @@
     <h3>{{ item.item_name }}</h3>
     <h5>{{ item.item_desc }}</h5>
     <h6>{{ item.item_price }}$</h6>
-    <a href="{% url 'index' %}" class="btn btn-info">Return</a>
+    <a href="{% url 'index' %}" class="btn btn-success">Return</a>
+    <a href="{% url 'edit-item' item.pk %}" class="btn btn-info">Edit</a>
+    <a href="{% url 'delete-item' item.pk %}" class="btn btn-danger">Delete</a>
 </div>
 </div>
 </div>

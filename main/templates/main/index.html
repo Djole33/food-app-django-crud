@@ -13,7 +13,9 @@
             <h6>{{ item.item_price }}$</h6>
         </div>
         <div class="col-md-2">
-            <a href="{% url 'detail' item.pk %}" class="btn btn-info">Details</a>
+            <a href="{% url 'detail' item.pk %}" class="btn btn-success">Details</a> <br />
+            <a href="{% url 'edit-item' item.pk %}" class="btn btn-info">Edit</a> <br />
+            <a href="{% url 'delete-item' item.pk %}" class="btn btn-danger">Delete</a>
         </div>
     </div>
 
