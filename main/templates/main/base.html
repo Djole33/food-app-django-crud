@@ -31,7 +31,14 @@
           </div>
         </div>
       </nav>
-      
+
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}" style="text-align: center;">
+        {{ message }}
+      </div>
+      {% endfor %}
+      {% endif %}
       {% block content %}
 
       {% endblock %}
