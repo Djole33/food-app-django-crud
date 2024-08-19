@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Item
 from .forms import ItemForm
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
@@ -40,3 +40,7 @@ def delete_item(request, pk):
     item = Item.objects.get(id=pk)
     item.delete()
     return redirect('/')
+
+@login_required
+def profilepage(request):
+    return render(request, 'users/profile.html')
