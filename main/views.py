@@ -3,11 +3,20 @@ from django.http import HttpResponse
 from .models import Item
 from .forms import ItemForm
 from django.contrib.auth.decorators import login_required
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
+
 # Create your views here.
 
 def index(request):
     item_objects = Item.objects.all()
     return render(request, template_name='main/index.html', context={'item_objects': item_objects})
+
+class IndexClassView(ListView):
+    model = Item
+    template_name = 'main/index.html'
+    context_object_name = 'item'
 
 def item(request):
     return HttpResponse("<h1>Hello Items!</h1>")
@@ -15,6 +24,10 @@ def item(request):
 def detail(request, pk):
     item = Item.objects.get(id=pk)
     return render(request, 'main/detail.html', context={'item': item})
+
+class FoodDetail(DetailView):
+    model = Item
+    template_name = 'main/detail.html'
 
 def create_item(request):
     form = ItemForm()
@@ -24,6 +37,16 @@ def create_item(request):
             form.save()
             return redirect('/')
     return render(request, 'main/create-item.html', context={'form': form})
+
+class CreateItem(CreateView):
+    model = Item
+    fields = ['item_name', 'item_desc', 'item_price', 'item_image']
+    template_name = 'main/create-item.html'
+
+    def form_valid(self, form):
+        form.instance.user_name = self.request.user
+
+        return super().form_valid(form)
 
 def edit_item(request, pk):
     item = Item.objects.get(id=pk)
